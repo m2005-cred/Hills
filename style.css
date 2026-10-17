@@ -1,0 +1,464 @@
+
+/* =========================================
+   1. COLOUR PALETTE AND DESIGN VARIABLES
+========================================= */
+
+:root {
+    --color-background: #100d18;
+    --color-surface: #1b1526;
+    --color-surface-light: #281e38;
+
+    --color-primary: #8b5cf6;
+    --color-primary-hover: #a78bfa;
+    --color-primary-soft: #39245a;
+
+    --color-text: #f8f5ff;
+    --color-muted: #b5acbf;
+    --color-border: #3b2d50;
+
+    --radius-small: 10px;
+    --radius-medium: 16px;
+    --radius-large: 24px;
+
+    --shadow-card: 0 10px 30px rgb(0 0 0 / 25%);
+}
+
+/* =========================================
+   2. GENERAL PAGE STYLING
+========================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 24px 16px;
+
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+    color: var(--color-text);
+
+    background:
+        radial-gradient(
+            circle at top,
+            #291944 0%,
+            #100d18 45%,
+            #09070e 100%
+        );
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+
+    transition:
+        background-color 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+button:focus-visible,
+input:focus-visible {
+    outline: 3px solid var(--color-primary-hover);
+    outline-offset: 3px;
+}
+
+/* =========================================
+   3. MAIN GAME CONTAINER
+========================================= */
+
+.game-container {
+    width: 100%;
+    max-width: 480px;
+    min-height: 80vh;
+    margin: 0 auto;
+    padding: 28px 20px;
+
+    background: rgb(20 15 29 / 75%);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-large);
+    box-shadow: var(--shadow-card);
+}
+
+/* Main game title */
+
+.game-container > h1 {
+    margin: 0 0 28px;
+    text-align: center;
+
+    font-size: clamp(2rem, 8vw, 2.7rem);
+    line-height: 1.2;
+    letter-spacing: -1px;
+
+    color: var(--color-text);
+    text-shadow: 0 0 24px rgb(139 92 246 / 25%);
+}
+
+/* =========================================
+   4. SCREEN VISIBILITY
+========================================= */
+
+/* Hide screens that have the hidden attribute */
+
+.game-screen[hidden] {
+    display: none !important;
+}
+
+/* The current screen */
+
+.game-screen.active {
+    display: block;
+    animation: screen-appear 0.3s ease;
+}
+
+/* =========================================
+   5. HEADINGS AND PARAGRAPHS
+========================================= */
+
+.game-screen h2 {
+    margin: 0 0 12px;
+    font-size: 1.6rem;
+    line-height: 1.3;
+}
+
+.game-screen p {
+    color: var(--color-muted);
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 24px !important;
+}
+
+/* =========================================
+   6. LABELS AND INPUTS
+========================================= */
+
+label {
+    display: block;
+    margin: 20px 0 8px;
+
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.player-count-input,
+.player-name-input {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 14px;
+
+    color: var(--color-text);
+    background: #120e1b;
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    outline: none;
+}
+
+.player-count-input::placeholder,
+.player-name-input::placeholder {
+    color: #81768f;
+}
+
+.player-count-input:focus,
+.player-name-input:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgb(139 92 246 / 15%);
+}
+
+/* =========================================
+   7. GENERAL BUTTON STYLING
+========================================= */
+
+.continue-btn,
+.add-player-btn,
+.start-game-btn,
+.next-player-btn {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px 18px;
+
+    color: #ffffff;
+    background: var(--color-primary);
+
+    border: 1px solid transparent;
+    border-radius: var(--radius-medium);
+
+    font-weight: 700;
+}
+
+/* Give buttons some breathing room */
+
+.continue-btn,
+.add-player-btn,
+.start-game-btn {
+    margin-top: 18px;
+}
+
+/* Hover effect */
+
+.continue-btn:hover,
+.add-player-btn:hover,
+.start-game-btn:hover,
+.next-player-btn:hover {
+    background: var(--color-primary-hover);
+    box-shadow: 0 5px 20px rgb(139 92 246 / 20%);
+    transform: translateY(-2px);
+}
+
+/* Press effect */
+
+.continue-btn:active,
+.add-player-btn:active,
+.start-game-btn:active,
+.next-player-btn:active {
+    transform: translateY(0);
+}
+
+/* =========================================
+   8. DIFFICULTY SELECTION
+========================================= */
+
+.difficulty-options {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 24px;
+}
+
+.difficulty-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+
+    width: 100%;
+    min-height: 110px;
+    padding: 18px;
+
+    text-align: left;
+    color: var(--color-text);
+    background: var(--color-surface);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+}
+
+.difficulty-name {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.difficulty-description {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Hover state */
+
+.difficulty-btn:hover {
+    background: var(--color-surface-light);
+    border-color: var(--color-primary);
+}
+
+/* Selected state: works with aria-pressed */
+
+.difficulty-btn.selected,
+.difficulty-btn[aria-pressed="true"] {
+    background: var(--color-primary-soft);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 0 20px rgb(139 92 246 / 15%);
+}
+
+.difficulty-btn.selected .difficulty-description,
+.difficulty-btn[aria-pressed="true"] .difficulty-description {
+    color: #e1d3ff;
+}
+
+
+.difficulty-continue-btn {
+    width: 100%;
+    min-height: 50px;
+    margin-top: 24px;
+    padding: 12px 18px;
+
+    color: #ffffff;
+    background: var(--color-primary);
+
+    border: none;
+    border-radius: var(--radius-medium);
+
+    font-weight: 700;
+    cursor: pointer;
+
+    transition:
+        background-color 0.2s ease,
+        transform 0.2s ease;
+}
+
+.difficulty-continue-btn:hover {
+    background: var(--color-primary-hover);
+    transform: translateY(-2px);
+}
+
+
+/* =========================================
+   9. PLAYER REGISTRATION
+========================================= */
+
+.players-screen h2 {
+    margin-bottom: 20px;
+}
+
+.player-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    margin: 20px 0;
+    padding: 0;
+    list-style: none;
+}
+
+.player-list li {
+    padding: 12px 16px;
+
+    color: var(--color-text);
+    background: var(--color-surface-light);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-small);
+
+    overflow-wrap: anywhere;
+}
+
+/* =========================================
+   10. GAMEPLAY SCREEN
+========================================= */
+
+.current-player-name {
+    text-align: center;
+    margin-bottom: 28px !important;
+    color: var(--color-primary-hover);
+}
+
+.choice-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.truth-btn,
+.dare-btn {
+    min-height: 110px;
+    padding: 18px 10px;
+
+    color: var(--color-text);
+    background: var(--color-surface-light);
+
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-medium);
+
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.truth-btn {
+    border-bottom: 3px solid #a78bfa;
+}
+
+.dare-btn {
+    border-bottom: 3px solid #c084fc;
+}
+
+.truth-btn:hover,
+.dare-btn:hover {
+    background: var(--color-primary-soft);
+    border-color: var(--color-primary);
+    transform: translateY(-3px);
+}
+
+/* =========================================
+   11. NEXT BUTTON SECTION
+========================================= */
+
+.challenge-section {
+    margin-top: 24px;
+}
+
+/* =========================================
+   12. SCREEN ANIMATION
+========================================= */
+
+@keyframes screen-appear {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* =========================================
+   13. TABLETS AND LARGER SCREENS
+========================================= */
+
+@media (min-width: 600px) {
+    body {
+        padding: 40px 24px;
+    }
+
+    .game-container {
+        max-width: 560px;
+        padding: 36px;
+    }
+
+    .difficulty-options {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .difficulty-btn {
+        min-height: 160px;
+        padding: 14px;
+    }
+}
+
+/* =========================================
+   14. REDUCE ANIMATION WHEN REQUESTED
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
+.start-game-btn:disabled {
+    background: #352b43;
+    color: #887d96;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+    opacity: 0.75;
+}

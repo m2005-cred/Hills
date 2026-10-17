@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Truth or Dare</title>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+  <main class="game-container">
+      <h1>Truth or Dare</h1>
+    <section class="game-screen setup-screen active">
+
+      <p>Welcome to Truth or Dare!</p>
+      <label for="player-count-input">Number of players</label>
+      <input 
+           type="number" 
+           id="player-count-input"
+           placeholder="Enter number of players" 
+           min="2" 
+           required
+           class="player-count-input">
+
+           <button type="button" class="continue-btn">Continue</button>
+      
+    </section>
+    
+<!-- Difficulty Selection -->
+<section class="game-screen difficulty-section" hidden>
+  <h2 class="section-title">Choose Your Level</h2>
+
+  <div class="difficulty-options">
+
+    <button
+      type="button"
+      class="difficulty-btn"
+      data-level="vanilla"
+      aria-pressed="true"
+    >
+      <span class="difficulty-name">Vanilla</span>
+      <span class="difficulty-description">
+        Easy, family-friendly truths and dares.
+      </span>
+    </button>
+
+    <button
+      type="button"
+      class="difficulty-btn"
+      data-level="spicy"
+      aria-pressed="false"
+    >
+      <span class="difficulty-name">Spicy</span>
+      <span class="difficulty-description">
+        A little crazier.
+      </span>
+    </button>
+
+    <button
+      type="button"
+      class="difficulty-btn"
+      data-level="crazy-hot"
+      aria-pressed="false"
+    >
+      <span class="difficulty-name">Crazy Hot</span>
+      <span class="difficulty-description">
+        The developers are scared to play it!
+      </span>
+    </button>
+
+  </div>
+  <button type="button" class="difficulty-continue-btn">Continue</button>
+</section>
+
+    <section class="game-screen players-screen" hidden>
+      <h2>Add Players</h2>
+      <input type="text" 
+          placeholder="Enter player name" 
+          required
+          class="player-name-input"
+          >
+      <button class="add-player-btn">
+        Add Player
+      </button>
+      <ul class="player-list"></ul>
+      <button type="button" class="start-game-btn">
+        Start Game
+      </button>
+    </section>
+
+   
+<section class="game-screen gameplay-section" hidden>
+    <h2 class="current-player-name">It's Your Turn</h2>
+
+    <div class="challenge-card">
+        <p class="challenge-type">YOUR CHALLENGE</p>
+
+        <p class="challenge-text">
+            Choose Truth or Dare to begin!
+        </p>
+    </div>
+
+    <div class="choice-buttons">
+        <button type="button" class="truth-btn">Truth</button>
+        <button type="button" class="dare-btn">Dare</button>
+    </div>
+
+    <div class="challenge-section">
+        <button type="button" class="next-player-btn">
+            Next Player
+        </button>
+    </div>
+</section>
+
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
